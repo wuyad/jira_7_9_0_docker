@@ -8,6 +8,8 @@ services:
       - jira-mysql
     networks:
       - webnet
+    links:
+      - jira-mysql
 
   jira-mysql:
     environment:
