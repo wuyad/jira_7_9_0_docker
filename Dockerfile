@@ -4,9 +4,6 @@ FROM openjdk:8-alpine
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_VERSION  7.8.0
-# 定义临时文件夹，用于存放上传的文件
-ENV TEMP_PATH     /temp/jira
-
 
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
@@ -32,7 +29,6 @@ RUN set -x \
     && sed --in-place          "s/java version/openjdk version/g" "${JIRA_INSTALL}/bin/check-java.sh" \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
     && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml" \
-	&& rm -rf                  "${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib/atlassian-extras-3.1.2.jar" \
 	&& cp                      "${JIRA_INSTALL}/lib/mysql-connector-java-5.1.45-bin.jar"  "${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib/"
 
 COPY atlassian-extras-3.2.jar       "${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib/" 
