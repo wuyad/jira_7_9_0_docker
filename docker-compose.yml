@@ -10,6 +10,9 @@ services:
       - LETSENCRYPT_EMAIL=alex_wuya@163.com
       - VIRTUAL_HOST=jira.info.baiwangjinfu.com
       - VIRTUAL_PORT=8080
+      - X_PROXY_NAME=jira.info.baiwangjinfu.com
+      - X_PROXY_PORT=443
+      - X_PROXY_SCHEME=https
     networks:
       - webnet
     links:
