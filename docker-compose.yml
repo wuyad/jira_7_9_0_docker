@@ -2,15 +2,13 @@ version: "3"
 services:
   jira:
     container_name: jira
-    image: localhost:5000/jira:7.9.0
+    image: jira:7.9.0
     depends_on:
       - jira-mysql
     environment:
-      - LETSENCRYPT_HOST=jira.info.baiwangjinfu.com
-      - LETSENCRYPT_EMAIL=alex_wuya@163.com
-      - VIRTUAL_HOST=jira.info.baiwangjinfu.com
+      - VIRTUAL_HOST=jira.bwjf.cn
       - VIRTUAL_PORT=8080
-      - X_PROXY_NAME=jira.info.baiwangjinfu.com
+      - X_PROXY_NAME=jira.bwjf.cn
       - X_PROXY_PORT=443
       - X_PROXY_SCHEME=https
     networks:
@@ -27,7 +25,7 @@ services:
       MYSQL_USER: jira
       MYSQL_PASSWORD: jira
       TZ: Asia/Shanghai
-    image: mysql:latest
+    image: mysql:5.7
     volumes:
       - ~/data/jira:/var/lib/mysql
     command: --character-set-server=utf8 --collation-server=utf8_bin
